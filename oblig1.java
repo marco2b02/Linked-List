@@ -8,6 +8,9 @@ public class oblig1 {
         Scanner scanner = new Scanner(System.in);
 
         int input;
+        int target;
+        int value;
+        
 
         do {
             System.out.println("\nEnter ønsket funksjon:");
@@ -21,7 +24,7 @@ public class oblig1 {
             System.out.println("8. Tell opp antall forekomster av ønsket verdi.");
             System.out.println("9. Skrive ut hele listen.");
             System.out.println("10. Slette hele listen.");
-            System.out.println("11. G tidskomplesitet (Big O) for hver funksjon.");
+            System.out.println("11. G tidskompleksitet (Big O) for hver funksjon.");
             System.out.println("0. Avslutt.");
             System.out.println();
 
@@ -44,19 +47,32 @@ public class oblig1 {
                 
                 case 4:
                     System.out.println("Skriv node du ønsker slettet:");
-                    int value = scanner.nextInt();
+                    value = scanner.nextInt();
                     linkedList.removeData(value);
                     break;
                 
                 case 5:
-                    System.out.println("Skriv inn hvilken node du ønsker å sette forran:");
-                    int targetNode = scanner.nextInt();
-                    System.out.println("Skriv inn verdi til node:");
-                    int valueNode = scanner.nextInt();
-                    linkedList.addAhead(targetNode, valueNode);
+                    System.out.println("Skriv inn hvilken node du ønsker å sette verdi bak:");
+                    target = scanner.nextInt();
+                    System.out.println("Skriv inn verdi til ny node:");
+                    value = scanner.nextInt();
+                    linkedList.addAhead(target, value);
+                    break;
+                
+                case 6:
+                    System.out.println("Skrin inn node du ønsker å sette verdi forran");
+                    target = scanner.nextInt();
+                    System.out.println("Skriv inn verdi til ny node");
+                    value = scanner.nextInt();
+                    linkedList.addFirst(target, value);
+                    break;
+
+                case 7:
+                    linkedList.listLength();
+                    break;
 
                 case 9:
-                    System.out.println("Nodene printet ut er:");
+                    System.out.println("Nodene printet ut er:\n");
                     linkedList.printList();
                     break;
 
@@ -120,6 +136,16 @@ class LinkedList {
         }
     }
 
+    public void printNode(int value){
+        System.out.println("╭-----------╮");
+        System.out.println("|     "  + value + "     |");
+        System.out.println("|-----------|");
+        System.out.println("|   next    |");
+        System.out.println("╰-----------╯");
+        System.out.println("      V     ");
+
+    }
+    
     public void printList() {
         Node temp = head;
 
@@ -128,12 +154,17 @@ class LinkedList {
             return;
         }
 
+        System.out.print("    HEAD\n");
+        System.out.println("     V");
         while (temp != null) {  // iterer så lenge temp ikke er null
-            System.out.print("|" + temp.data + "|" + " ");  // skriver ut data i noden
+            
+            printNode(temp.data);  // skriver ut data i noden
             temp = temp.next;  // går videre til neste node
         }
+        System.out.println("     NULL");
         System.out.println("\n");  // avslutt med linjeskift etter at hele listen er skrevet ut
     }
+
 
     public void removeData(int value){
         if(head == null){
@@ -175,4 +206,48 @@ class LinkedList {
             System.out.println("Verdien " + target + " finnes ikke i listen.");
         }
     }
+
+    public void addFirst(int target, int value){
+        Node temp = head;
+
+        if(head == null){
+            System.out.println("Listen er tom."); // ser om listen er tom
+        }else if(head.data == target){
+            
+            Node newNode = new Node(value);
+            newNode.next = head; // hvis target er head
+            head = newNode;
+            return;
+        }
+        while(temp.next != null && temp.next.data != target){
+            temp = temp.next; // letter gjennom listen for å finne target
+        }
+        if(temp.next != null){
+            Node newNode = new Node(value);
+            newNode.next = temp.next; // når target er funnet setter vi nye node inn før target
+            temp.next = newNode;
+            return;
+        }else{
+            System.out.println("Noden " + target + " finnes ikke i listen."); // i tilfelle target ikke eksisterer
+        }
+    }
+
+    public void listLength(){
+
+        int counter = 0;
+
+        if(head == null){
+            System.out.println("Listen er tom."); // skjekker om listen er tom
+        }
+
+        Node temp = head;
+        while(temp != null){
+            temp = temp.next; // ittererer gjennom listen til den finner slutten
+            counter++; // en teller som teller hvor mange elementer det er
+        }
+
+        System.out.println("Listen er: " + counter + " elementer lang.");
+    }
+
+
 }
