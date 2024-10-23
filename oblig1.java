@@ -37,6 +37,23 @@ public class oblig1 {
                     int data = scanner.nextInt();
                     linkedList.addLast(data);
                     break;
+                
+                case 3:
+                    linkedList.removeLast();
+                    break;
+                
+                case 4:
+                    System.out.println("Skriv node du ønsker slettet:");
+                    int value = scanner.nextInt();
+                    linkedList.removeData(value);
+                    break;
+                
+                case 5:
+                    System.out.println("Skriv inn hvilken node du ønsker å sette forran:");
+                    int targetNode = scanner.nextInt();
+                    System.out.println("Skriv inn verdi til node:");
+                    int valueNode = scanner.nextInt();
+                    linkedList.addAhead(targetNode, valueNode);
 
                 case 9:
                     System.out.println("Nodene printet ut er:");
@@ -111,10 +128,51 @@ class LinkedList {
             return;
         }
 
-        while (temp != null) {  // Iterer så lenge temp ikke er null
-            System.out.print(temp.data + " ");  // Skriver ut data i noden
-            temp = temp.next;  // Går videre til neste node
+        while (temp != null) {  // iterer så lenge temp ikke er null
+            System.out.print("|" + temp.data + "|" + " ");  // skriver ut data i noden
+            temp = temp.next;  // går videre til neste node
         }
-        System.out.println();  // Avslutt med linjeskift etter at hele listen er skrevet ut
+        System.out.println("\n");  // avslutt med linjeskift etter at hele listen er skrevet ut
+    }
+
+    public void removeData(int value){
+        if(head == null){
+            System.out.println("Listen er tom."); // skjekker om listen er tom
+            return; 
+        }else if(head.data == value){
+            head = head.next; // hvis hodet er ønsker verdi
+        }
+
+        Node temp = head;
+        while(temp.next != null && temp.next.data != value){ //går gjennom listen til den finner ønsket node
+            temp = temp.next;
+        }
+        if(temp.next != null){
+            temp.next = temp.next.next; // når ønsket slettet node er funnet blir den koblet ut
+        }
+    }
+
+    public void addAhead(int target, int value){
+        if(head == null){
+            System.out.println("Listen er tom."); // skjekker om listen er tom
+            return;
+        }else if(head.data == target){
+            Node newNode = new Node(value); // lager ny node og setter dem
+            head.next = newNode;
+            return;
+        }
+
+        Node temp = head;
+        while(temp.next != null && temp.next.data != target){
+            temp = temp.next; // leter gjennom listen for å finne node
+        }
+        if(temp.next != null){
+            Node newNode = new Node(value); // legger til 
+            newNode.next = temp.next; // ny node peker på noden etter target
+            temp.next = newNode; // nye node blir satt etter target
+            return;
+        }else{
+            System.out.println("Verdien " + target + " finnes ikke i listen.");
+        }
     }
 }
