@@ -70,6 +70,12 @@ public class oblig1 {
                 case 7:
                     linkedList.listLength();
                     break;
+                
+                case 8:
+                    System.out.println("Hvilken element ønsker du å finne antall forekomster: ");
+                    target = scanner.nextInt();
+                    System.out.println("\n" + "Antall forekomster av verdi " + target + " er " + linkedList.findInstances(target));
+                    break;
 
                 case 9:
                     System.out.println("Nodene printet ut er:\n");
@@ -238,6 +244,7 @@ class LinkedList {
 
         if(head == null){
             System.out.println("Listen er tom."); // skjekker om listen er tom
+            return;
         }
 
         Node temp = head;
@@ -246,7 +253,25 @@ class LinkedList {
             counter++; // en teller som teller hvor mange elementer det er
         }
 
-        System.out.println("Listen er: " + counter + " elementer lang.");
+        System.out.println("\nListen er: " + counter + " element(er) lang.");
+    }
+    
+    public int findInstances(int target){
+
+        int counter = 0;
+
+        Node temp = head;
+        
+        while(temp != null){
+            if(temp.data == target){
+                counter++;
+                
+            }
+            temp = temp.next;
+        }
+        
+        return counter;
+
     }
 
 
