@@ -81,6 +81,11 @@ public class oblig1 {
                     System.out.println("Nodene printet ut er:\n");
                     linkedList.printList();
                     break;
+                
+                case 10:
+                    System.out.println("Du sletter alle elementene i listen");
+                    linkedList.removeAll();
+                    break;
 
                 default:
                     break;
@@ -271,8 +276,19 @@ class LinkedList {
         }
         
         return counter;
-
     }
 
+    public void removeAll(){
+        int counter = 0;
+        if(head == null){
+            System.out.println("Listen er tom.");
+        }
+        while(head != null){
+            head = head.next; // setter det slik at head bli neste element fram til head er lik null
+            counter++; // har en counter som teller hvor mange elementer som ble slettet
+        }
+        System.out.println("Antall elementer slettet er: " + counter);
+        
+    }
 
 }
