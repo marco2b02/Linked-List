@@ -86,9 +86,13 @@ public class oblig1 {
                     System.out.println("Du sletter alle elementene i listen");
                     linkedList.removeAll();
                     break;
+                
+                case 11:
+                    linkedList.timeComplexity();
+                    break;
 
                 default:
-                    break;
+                    System.out.println("Error (1-11)");
             }
         } while (input != 0);
 
@@ -267,9 +271,9 @@ class LinkedList {
 
         Node temp = head;
         
-        while(temp != null){
-            if(temp.data == target){
-                counter++;
+        while(temp != null){    // while løkke som kjøres så lenge det er verdier i listen 
+            if(temp.data == target){ // if løkke som letter etter target verdi
+                counter++; // counter som teller antall
                 
             }
             temp = temp.next;
@@ -289,6 +293,20 @@ class LinkedList {
         }
         System.out.println("Antall elementer slettet er: " + counter);
         
+    }
+
+    public void timeComplexity(){
+        System.out.println("Tidskomplekistet for 1: O(1) ");
+        System.out.println("Tidskomplekistet for 2: O(n)");
+        System.out.println("Tidskomplekistet for 3: O(n)");
+        System.out.println("Tidskomplekistet for 4: O(n)");
+        System.out.println("Tidskomplekistet for 5: O(n)");
+        System.out.println("Tidskomplekistet for 6: O(n)");
+        System.out.println("Tidskomplekistet for 7: O(n)");
+        System.out.println("Tidskomplekistet for 8: O(n)");
+        System.out.println("Tidskomplekistet for 9: O(n)");
+        System.out.println("Tidskomplekistet for 10: O(n)");
+        System.out.println("Tidskomplekistet for 11: O(n)");
     }
 
 }
